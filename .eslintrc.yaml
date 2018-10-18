@@ -1,0 +1,11 @@
+---
+# parser: eslint
+plugins: react
+extends:
+  - eslint:recommended
+  - plugin:react/recommended
+  - airbnb
+
+rules:
+  linebreak-style: 0
+...
