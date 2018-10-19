@@ -6,7 +6,7 @@ export default class Home extends Component {
     return (
       <div className="Home">
         <div className="lander">
-          <h1>num+</h1>
+          <h1>num</h1>
           <p>App for mental calculation</p>
         </div>
       </div>
