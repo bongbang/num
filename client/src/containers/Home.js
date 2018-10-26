@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Home.css';
 
 export default class Home extends Component {
@@ -8,6 +9,8 @@ export default class Home extends Component {
         <div className="lander">
           <h1>num</h1>
           <p>App for mental calculation</p>
+          {/* TODO: when quiz page is ready, link to that instead of /report. */}
+          <Link to='/report'>Multiplication Problems</Link>
         </div>
       </div>
     );
