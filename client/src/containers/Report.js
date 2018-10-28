@@ -4,10 +4,10 @@ import mockgraph from './mockgraph.png';
 export default class Report extends Component {
   render() {
     return (
-		<div className="container" style={{width:800 + 'px'}}>
+		<div className="container">
 
 			<div className="row justify-content-center">
-				<div className="px-5" style={{width:100 + '%'}}>
+				<div className="px-5">
 					<h2 className="display-2">Report card</h2>
 				</div>
 			</div>
@@ -53,7 +53,7 @@ export default class Report extends Component {
 							</li>
 						</ul>
 					</div>
-					<div className="row" style={{width: 100 + '%'}}>
+					<div className="row">
 						<img src={mockgraph} width="800" height="600"/>
 					</div>
 				</div>
