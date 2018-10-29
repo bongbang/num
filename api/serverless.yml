@@ -38,7 +38,7 @@ provider:
 
 functions:
   make-quiz:
-    handler: make-quiz.default
+    handler: makeQuiz.default
     events:
       - http:
           path: module/{id}
