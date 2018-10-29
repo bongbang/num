@@ -37,12 +37,13 @@ provider:
   #environment: ${file(env.yml):${self:provider.stage}}
 
 functions:
-  hello:
-    handler: handler.hello
+  make-quiz:
+    handler: make-quiz.default
     events:
       - http:
-          path: hello
+          path: module/{id}
           method: get
+          cors: true
 
 # Create our resources with separate CloudFormation templates
 resources:
