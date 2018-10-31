@@ -11,9 +11,6 @@ provider:
   region: us-east-1
 
 functions:
-  hello:
-    handler: handler.hello
-
   get_quiz:
     handler: get_quiz.get_quiz
     events:
