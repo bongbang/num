@@ -11,8 +11,8 @@ provider:
   region: us-east-1
 
 functions:
-  get_quiz:
-    handler: get_quiz.get_quiz
+  make_quiz:
+    handler: make_quiz.make_quiz
     events:
       - http:
           path: module/{id}
