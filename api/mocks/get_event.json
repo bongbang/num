@@ -1,6 +1,6 @@
 {
   "pathParameters": {
-    "id": "m22"
+    "id": "multiply_double_digits"
   },
   "requestContext": {
     "identity": {
