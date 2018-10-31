@@ -6,17 +6,15 @@ def make_quiz(event, context):
 
     try:
         module = getattr(modules, event['pathParameters']['id'])
+        status_code = 200
         message = [module() for i in range(n)]
     except KeyError:
         status_code = 404
         message = 'Module doesn''t exist'
 
-    result = {'message': message}
-
-    # create a response
     response = {
-        "statusCode": 200,
-        "body": json.dumps(result)
+        'statusCode': status_code,
+        'body': json.dumps({'message': message})
     }
 
     return response
