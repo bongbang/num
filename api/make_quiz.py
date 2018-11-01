@@ -14,6 +14,10 @@ def make_quiz(event, context):
 
     response = {
         'statusCode': status_code,
+        'headers': json.dumps({
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': True
+            }),
         'body': json.dumps({'message': message})
     }
 
