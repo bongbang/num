@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
 import mockgraph from './mockgraph.png';
 
-export default class Report extends Component {
-  render() {
-    return (
+function QuizResult(props) {
+	var resultDisplay = [];
+	for(var i = 0; i < props.results.length; i++) {
+		resultDisplay.push(
+			<tr>
+				<th scope="row">i</th>
+				<td>{props.results[i].question}</td>
+				<td>{props.results[i].expectedAnswer}</td>
+				<td>{props.results[i].actualAnswer}</td>
+				<td>TODO</td>
+			</tr>
+		)
+	}
+
+	return (
 		<div className="container">
 
 			<div className="row justify-content-center">
@@ -18,7 +30,7 @@ export default class Report extends Component {
 						Average Time
 					</div>
 					<div className="text-center display-4">
-						7.8s
+						{props.averageTime}s
 					</div>
 				</div>
 
@@ -27,7 +39,7 @@ export default class Report extends Component {
 						Average Error
 					</div>
 					<div className="text-center display-4">
-						11.0%
+						{props.averageError}%
 					</div>
 				</div>
 
@@ -36,7 +48,7 @@ export default class Report extends Component {
 						Average Adjusted Time
 					</div>
 					<div className="text-center display-4">
-						8.1s
+						{props.adjustedTime}s
 					</div>
 					</div>
 			</div>
@@ -71,46 +83,55 @@ export default class Report extends Component {
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Given 400 Foos, how much is that in Bars?</td>
-							<td>100</td>
-							<td>100</td>
-							<td className="text-success">0</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Julia Bell was born in 1991 and died in 2016, how old was she when she died?</td>
-							<td>25</td>
-							<td>90</td>
-							<td className="text-danger">65</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>STCK closed at 874.26 yesterday and 852.09 today. How much did it drop by?</td>
-							<td>22.17</td>
-							<td>20.00</td>
-							<td className="text-success">2.17</td>
-						</tr>
-						<tr>
-							<th scope="row">4</th>
-							<td>The speed limit is 55 MPH. How fast can you drive in km/h?</td>
-							<td>88.51</td>
-							<td>100</td>
-							<td className="text-warning">11.49</td>
-						</tr>
-						<tr>
-							<th scope="row">5</th>
-							<td>Insert last question here?</td>
-							<td>800001</td>
-							<td>800000</td>
-							<td className="text-success">1</td>
-						</tr>
+						{resultDisplay}
 					</tbody>
 				</table>
 			</div>
 
 		</div>
-    );
-  }
+	);
+}
+
+export default class Report extends Component {
+	render() {
+		const results = [
+			{
+				question: "Given 200 Foos, how much is that in Bars?",
+				expectedAnswer: 100,
+				actualAnswer: 100,
+				timeTaken: 1.1,
+			},
+			{
+				question: "Julia Bell was born in 1990 and died in 2015, how old was she when she died?",
+				expectedAnswer: 25,
+				actualAnswer: 90,
+				timeTaken: 1.2,
+			},
+			{
+				question: "STOCK closed at 874.25 yesterday and 852.08 today. How much did it drop by?",
+				expectedAnswer: 22.17,
+				actualAnswer: 20.,
+				timeTaken: 1.3,
+			},
+			{
+				question: "The speed limit is 55 mi/h. How fast can you drive in km/h?",
+				expectedAnswer: 88.51,
+				actualAnswer: 100.,
+				timeTaken: 1.5,
+			},
+			{
+				question: "The answer is 500000. What is the answer?",
+				expectedAnswer: 500000,
+				actualAnswer: 500001,
+				timeTaken: 1.8,
+			},
+		];
+		// TODO: calculate average time, adjusted time, and error from results.
+		return <QuizResult
+			averageTime="9.4"
+			averageError="11.2"
+			adjustedTime="8.7"
+			results={results}
+		/>
+	}
 }
