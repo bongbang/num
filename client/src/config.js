@@ -1,4 +1,8 @@
 const dev = {
+  s3: {
+    REGION: 'us-east-1',
+    BUCKET: 'num-client-dev'
+  },
   apiGateway: {
     REGION: 'us-east-1',
     URL: 'https://op67d2tcqa.execute-api.us-east-1.amazonaws.com/dev'
