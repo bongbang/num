@@ -1,0 +1,10 @@
+{
+  "pathParameters": {
+    "id": "multiply_double_digits"
+  },
+  "requestContext": {
+    "identity": {
+      "cognitoIdentityId": "USER-SUB-1234"
+    }
+  }
+}
