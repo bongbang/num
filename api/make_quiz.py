@@ -7,7 +7,8 @@ def make_quiz(event, context):
     try:
         module = getattr(modules, event['pathParameters']['id'])
         status_code = 200
-        message = [module() for i in range(n)]
+        temp_list = list(zip(*[module() for i in range(n)]))
+        message = {'questions': temp_list[0], 'answers': temp_list[1]}
     except KeyError:
         status_code = 404
         message = 'Module doesn''t exist'
