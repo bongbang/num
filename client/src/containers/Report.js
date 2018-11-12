@@ -1,25 +1,39 @@
+import {calculateError, calculateAdjustedTime} from '../resultCalculator.js';
+
 import React, { Component } from 'react';
 import { Grid, Row, Col, Panel } from 'react-bootstrap';
 
 import mockgraph from './mockgraph.png';
 
 function QuizResult(props) {
-	var averageTime = 9.4;
-	var averageError = 11.2;
-	var adjustedTime = 8.7;
+	var averageTime = 0.0;
+	var averageError = 0.0;
+	var adjustedTime = 0.0;
 	
 	var resultDisplay = [];
 	for(var i = 0; i < props.results.length; i++) {
+		var error = calculateError(
+			props.results[i].expectedAnswer,
+			props.results[i].actualAnswer
+		);
+
 		resultDisplay.push(
 			<tr>
 				<th scope="row">i</th>
 				<td>{props.results[i].question}</td>
 				<td>{props.results[i].expectedAnswer}</td>
 				<td>{props.results[i].actualAnswer}</td>
-				<td>TODO</td>
+				<td>{Number.parseFloat(error * 100.0).toFixed(3)}%</td>
 			</tr>
-		)
+		);
+
+		averageTime += props.results[i].timeTaken;
+		averageError += error;
 	}
+
+	averageTime /= props.results.length;
+	averageError /= props.results.length;
+	adjustedTime = calculateAdjustedTime(averageTime, averageError);
 
 	return (
 		<Grid>
@@ -38,7 +52,7 @@ function QuizResult(props) {
 							Average Time
 						</Panel.Heading>
 						<Panel.Body>
-							{averageTime}s
+							{Number.parseFloat(averageTime).toFixed(3)}s
 						</Panel.Body>
 					</Panel>
 				</Col>
@@ -51,7 +65,8 @@ function QuizResult(props) {
 							Average Error
 						</Panel.Heading>
 						<Panel.Body>
-							{averageError}%
+							{/* We multiply by 100.0 to turn averageError into a percent */}
+							{Number.parseFloat(averageError * 100.0).toFixed(3)}%
 						</Panel.Body>
 					</Panel>
 				</Col>
@@ -64,7 +79,7 @@ function QuizResult(props) {
 							Average Adjusted Time
 						</Panel.Heading>
 						<Panel.Body>
-							{adjustedTime}s
+							{Number.parseFloat(adjustedTime).toFixed(3)}s
 						</Panel.Body>
 					</Panel>
 				</Col>
