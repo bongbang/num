@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import { Grid, Row, Col, Panel } from 'react-bootstrap';
+
 import mockgraph from './mockgraph.png';
 
 function QuizResult(props) {
+	var averageTime = 9.4;
+	var averageError = 11.2;
+	var adjustedTime = 8.7;
+	
 	var resultDisplay = [];
 	for(var i = 0; i < props.results.length; i++) {
 		resultDisplay.push(
@@ -16,62 +22,70 @@ function QuizResult(props) {
 	}
 
 	return (
-		<div className="container">
+		<Grid>
 
-			<div className="row justify-content-center">
+			<Row>
 				<div className="px-5">
 					<h2 className="display-2">Report card</h2>
 				</div>
-			</div>
+			</Row>
 
-			<div className="row d-flex bd-highlight justify-content-between">
-				<div className="bd-highlight border rounded">
-					<div className="text-muted">
-						Average Time
-					</div>
-					<div className="text-center display-4">
-						{props.averageTime}s
-					</div>
-				</div>
+			<Row> {/*justify-content-between*/}
+				<Col xs={0} md={1}/>
+				<Col xs={12} md={2}>
+					<Panel>
+						<Panel.Heading>
+							Average Time
+						</Panel.Heading>
+						<Panel.Body>
+							{averageTime}s
+						</Panel.Body>
+					</Panel>
+				</Col>
 
-				<div className="bd-highlight border rounded">
-					<div className="text-muted">
-						Average Error
-					</div>
-					<div className="text-center display-4">
-						{props.averageError}%
-					</div>
-				</div>
+				<Col xs={0} md={2}/>
 
-				<div className="bd-highlight border rounded">
-					<div className="text-muted">
-						Average Adjusted Time
-					</div>
-					<div className="text-center display-4">
-						{props.adjustedTime}s
-					</div>
-					</div>
-			</div>
+				<Col xs={12} md={2}>
+					<Panel>
+						<Panel.Heading>
+							Average Error
+						</Panel.Heading>
+						<Panel.Body>
+							{averageError}%
+						</Panel.Body>
+					</Panel>
+				</Col>
 
-			<div className="row my-3">
-				<div className="container-fluid">
-					<div className="row">
-						<ul className="pagination bd-highlight my-0">
-							<li className="page-item active">
-								<a className="page-link" href="#">Adjusted Time</a>
-							</li>
-							<li className="page-item">
-								<a className="page-link" href="#">Time vs. Error</a>
-							</li>
-						</ul>
-					</div>
-					<div className="row">
-						<img src={mockgraph} width="800" height="600"/>
-					</div>
-				</div>
-			</div>
+				<Col xs={0} md={2}/>
 
-			<div className="row border rounded">
+				<Col xs={12} md={3}>
+					<Panel>
+						<Panel.Heading>
+							Average Adjusted Time
+						</Panel.Heading>
+						<Panel.Body>
+							{adjustedTime}s
+						</Panel.Body>
+					</Panel>
+				</Col>
+
+			</Row>
+
+			<Row>
+				<ul className="pagination bd-highlight my-0">
+					<li className="page-item active">
+						<a className="page-link" href="#">Adjusted Time</a>
+					</li>
+					<li className="page-item">
+						<a className="page-link" href="#">Time vs. Error</a>
+					</li>
+				</ul>
+			</Row>
+			<Row>
+				<img src={mockgraph} width="800" height="600"/>
+			</Row>
+
+			<Row>
 				<table className="table">
 					<thead>
 						<tr>
@@ -86,9 +100,9 @@ function QuizResult(props) {
 						{resultDisplay}
 					</tbody>
 				</table>
-			</div>
+			</Row>
 
-		</div>
+		</Grid>
 	);
 }
 
