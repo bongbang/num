@@ -11,16 +11,19 @@ export default class Quiz extends Component {
 
     this.state = {
       isLoading: true,
-      questionNumber: 1
+      questionNumber: 1,
+      answer: ''
     };
 
     this.quiz = [];
+    this.answers = [];
   }
 
   async componentDidMount() {
     // console.log('id: ' + this.props.match.params.id);
     try {
       this.quiz = await API.get('num', `/module/${this.props.match.params.id}`);
+      this.answers = new Array(this.quiz.questions.length);
     } catch (e) {
       alert(e);
     }
@@ -28,12 +31,22 @@ export default class Quiz extends Component {
     this.setState({ isLoading: false });
   }
 
+  handleChange = event => {
+    this.setState({ answer: event.target.value });
+  };
+
   handleSubmit = event => {
     event.preventDefault();
+    this.answers[this.state.questionNumber - 1] = this.state.answer;
     if (this.state.questionNumber < this.quiz.questions.length) {
-      this.setState({ questionNumber: this.state.questionNumber + 1 });
+      this.setState({
+        questionNumber: this.state.questionNumber + 1,
+        answer: ''
+      });
     } else {
-      alert('End of quiz. Go to report.');
+      alert(
+        'Answers: ' + this.answers.join(', ') + '\n' + 'To be sent to Report'
+      );
     }
   };
 
@@ -48,7 +61,11 @@ export default class Quiz extends Component {
         </Well>
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="answer">
-            <FormControl />
+            <FormControl
+              autoFocus
+              value={this.state.answer}
+              onChange={this.handleChange}
+            />
           </FormGroup>
         </form>
       </div>
