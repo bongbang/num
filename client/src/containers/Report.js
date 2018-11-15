@@ -123,38 +123,7 @@ function QuizResult(props) {
 
 export default class Report extends Component {
 	render() {
-		const results = [
-			{
-				question: "Given 200 Foos, how much is that in Bars?",
-				expectedAnswer: 100,
-				actualAnswer: 100,
-				timeTaken: 1.1,
-			},
-			{
-				question: "Julia Bell was born in 1990 and died in 2015, how old was she when she died?",
-				expectedAnswer: 25,
-				actualAnswer: 90,
-				timeTaken: 1.2,
-			},
-			{
-				question: "STOCK closed at 874.25 yesterday and 852.08 today. How much did it drop by?",
-				expectedAnswer: 22.17,
-				actualAnswer: 20.,
-				timeTaken: 1.3,
-			},
-			{
-				question: "The speed limit is 55 mi/h. How fast can you drive in km/h?",
-				expectedAnswer: 88.51,
-				actualAnswer: 100.,
-				timeTaken: 1.5,
-			},
-			{
-				question: "The answer is 500000. What is the answer?",
-				expectedAnswer: 500000,
-				actualAnswer: 500001,
-				timeTaken: 1.8,
-			},
-		];
+		const results = this.props.location.state.quizResults;
 		// TODO: calculate average time, adjusted time, and error from results.
 		return <QuizResult
 			averageTime="9.4"
