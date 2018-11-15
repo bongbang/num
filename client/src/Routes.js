@@ -5,7 +5,7 @@ import AppliedRoute from './components/AppliedRoute';
 
 import Home from './containers/Home';
 import Report from './containers/Report';
-import Quiz from './containers/Quiz';
+import Quiz from './routes/Quiz';
 import NotFound from './containers/NotFound';
 
 export default ({ childProps }) => (
