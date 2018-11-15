@@ -1,6 +1,4 @@
 import React from 'react';
+import { PageHeader } from 'react-bootstrap';
 
-export default (props) => (
-
-
-);
+export default ({ quiz, answers }) => <PageHeader>Quiz reportcard</PageHeader>;
