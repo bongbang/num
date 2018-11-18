@@ -12,20 +12,21 @@ export default class Quiz extends Component {
 
     this.state = {
       isLoading: true,
-      questionNumber: 1,
+      i: 0,
       answer: '',
       isCompleted: false
     };
 
     this.quiz = [];
-    this.answers = [];
+    this.resultSet = []; //TODO define length here if URL contains count and remove below
   }
 
   async componentDidMount() {
     // console.log('id: ' + this.props.match.params.id);
     try {
       this.quiz = await API.get('num', `/module/${this.props.match.params.id}`);
-      this.answers = new Array(this.quiz.questions.length);
+      this.resultSet = new Array(this.quiz.questions.length); //TODO remove if defined above
+      this.startTime = new Date().getTime();
     } catch (e) {
       alert(e);
     }
@@ -39,12 +40,18 @@ export default class Quiz extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.answers[this.state.questionNumber - 1] = this.state.answer;
-    if (this.state.questionNumber < this.quiz.questions.length) {
+    this.resultSet[this.state.i] = {
+      question: this.quiz.questions[this.state.i],
+      correctAnswer: this.quiz.answers[this.state.i],
+      userAnswer: this.state.answer,
+      elapsedTime: (new Date().getTime() - this.startTime) / 1000
+    };
+    if (this.state.i < this.resultSet.length - 1) {
       this.setState({
-        questionNumber: this.state.questionNumber + 1,
+        i: this.state.i + 1,
         answer: ''
       });
+      this.startTime = new Date().getTime();
     } else {
       this.setState({ isCompleted: true });
     }
@@ -53,11 +60,8 @@ export default class Quiz extends Component {
   renderQuiz = () => (
     <>
       <PageHeader>Quiz</PageHeader>
-      <p>{this.state.questionNumber}.</p>
-      <Well>
-        {!this.state.isLoading &&
-          this.quiz.questions[this.state.questionNumber - 1]}
-      </Well>
+      <p>{this.state.i + 1}.</p>
+      <Well>{!this.state.isLoading && this.quiz.questions[this.state.i]}</Well>
       <form onSubmit={this.handleSubmit}>
         <FormGroup controlId="answer">
           <FormControl
@@ -71,11 +75,9 @@ export default class Quiz extends Component {
   );
 
   render() {
-    return this.state.isCompleted ? (
-      React.createElement(Report, { quiz: this.quiz, answers: this.answers })
-      // <Report quiz={this.quiz} userAnswers={this.answers} />
-    ) : (
-      this.renderQuiz()
-    );
+    return this.state.isCompleted
+      ? React.createElement(Report, { dataSet: this.resultSet })
+      : // <Report quiz={this.quiz} userresultSet={this.resultSet} />
+        this.renderQuiz();
   }
 }
