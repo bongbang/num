@@ -11,12 +11,9 @@ export default function({ dataSet }) {
     return d;
   });
 
-  const packageRow = (...row) =>
-    React.createElement(
-      'tr',
-      null,
-      row.map(x => React.createElement('td', null, x))
-    );
+  const packageRow = (...row) => (
+    <tr>{row.map(x => React.createElement('td', null, x))}</tr>
+  );
 
   const makeRow = (d, i) =>
     packageRow(
