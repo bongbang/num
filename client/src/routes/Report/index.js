@@ -6,7 +6,7 @@ export default class Report extends Component {
   constructor(props) {
     super(props);
 
-    this.dataSet.map(function(d) {
+    this.props.dataSet.map(function(d) {
       d.error = Math.abs(d.userAnswer / d.correctAnswer - 1) * 100;
       d.adjustedTime =
         d.elapsedTime +
@@ -45,7 +45,7 @@ export default class Report extends Component {
             'Adjusted Time'
           )}
         </thead>
-        <tbody>{this.dataSet.map(this.makeRow)}</tbody>
+        <tbody>{this.props.dataSet.map(this.makeRow)}</tbody>
       </Table>
     </>
   );
