@@ -15,6 +15,11 @@ export default class Report extends Component {
     });
   }
 
+  componentDidMount() {
+    const d3 = window.d3;
+    d3.selectAll('p').text('Hi');
+  }
+
   packageRow = (...row) => (
     <tr>{row.map(x => React.createElement('td', null, x))}</tr>
   );
@@ -33,6 +38,7 @@ export default class Report extends Component {
   render = () => (
     <>
       <PageHeader>Quiz reportcard</PageHeader>
+      <p />
       <Table bordered condensed hover responsive>
         <thead>
           {this.packageRow(
