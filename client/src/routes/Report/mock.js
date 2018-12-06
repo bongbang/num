@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { PageHeader, Table } from 'react-bootstrap';
-// import BootstrapTable from 'react-bootstrap-table-next';
+import Report from './index';
 
-export default class Report extends Component {
+export default class Mock extends Component {
   constructor(props) {
     super(props);
 
-    this.dataSet = [
+    this.resultSet = [
       {
         question: '55 × 85 = ?',
         correctAnswer: 4675,
@@ -50,44 +49,7 @@ export default class Report extends Component {
     ];
   }
 
-  componentDidMount() {
-    const d3 = window.d3;
-    d3.selectAll('p').text('Hi');
+  render() {
+    return React.createElement(Report, { dataSet: this.resultSet });
   }
-
-  packageRow = (...row) => (
-    <tr>{row.map(x => React.createElement('td', null, x))}</tr>
-  );
-
-  makeRow = (d, i) =>
-    this.packageRow(
-      i + 1,
-      d.question,
-      d.userAnswer,
-      d.correctAnswer,
-      d.error.toFixed(1),
-      d.elapsedTime.toFixed(1),
-      d.adjustedTime.toFixed(1)
-    );
-
-  render = () => (
-    <>
-      <PageHeader>Quiz reportcard</PageHeader>
-      <p />
-      <Table bordered condensed hover responsive>
-        <thead>
-          {this.packageRow(
-            '#',
-            'Question',
-            'Answer',
-            'Correct Answer',
-            'Error',
-            'Time',
-            'Adjusted Time'
-          )}
-        </thead>
-        <tbody>{this.dataSet.map(this.makeRow)}</tbody>
-      </Table>
-    </>
-  );
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { PageHeader, Table } from 'react-bootstrap';
+import Plot from './Plot';
 // import BootstrapTable from 'react-bootstrap-table-next';
 
 export default class Report extends Component {
@@ -16,8 +17,7 @@ export default class Report extends Component {
   }
 
   componentDidMount() {
-    const d3 = window.d3;
-    d3.selectAll('p').text('Hi');
+    Plot(this.props.dataSet);
   }
 
   packageRow = (...row) => (
@@ -38,7 +38,7 @@ export default class Report extends Component {
   render = () => (
     <>
       <PageHeader>Quiz reportcard</PageHeader>
-      <p />
+      <div id="chart" />
       <Table bordered condensed hover responsive>
         <thead>
           {this.packageRow(
