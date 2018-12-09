@@ -50,6 +50,6 @@ export default class Mock extends Component {
   }
 
   render() {
-    return React.createElement(Report, { dataSet: this.resultSet });
+    return React.createElement(Report, { data: this.resultSet });
   }
 }

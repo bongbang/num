@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import { API } from 'aws-amplify';
-import { PageHeader, Well, FormGroup, FormControl } from 'react-bootstrap';
+import { Card, FormGroup, FormControl } from 'react-bootstrap';
 import Report from './Report';
 // import { s3Upload } from '../libs/awsLib';
 // import config from '../config';
@@ -59,9 +59,9 @@ export default class Quiz extends Component {
 
   renderQuiz = () => (
     <>
-      <PageHeader>Quiz</PageHeader>
+      <h1>Quiz</h1>
       <p>{this.state.i + 1}.</p>
-      <Well>{!this.state.isLoading && this.quiz.questions[this.state.i]}</Well>
+      <Card>{!this.state.isLoading && this.quiz.questions[this.state.i]}</Card>
       <form onSubmit={this.handleSubmit}>
         <FormGroup controlId="answer">
           <FormControl
@@ -76,7 +76,7 @@ export default class Quiz extends Component {
 
   render() {
     return this.state.isCompleted
-      ? React.createElement(Report, { dataSet: this.resultSet })
+      ? React.createElement(Report, { data: this.resultSet })
       : // <Report quiz={this.quiz} userresultSet={this.resultSet} />
         this.renderQuiz();
   }
