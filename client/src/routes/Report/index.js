@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Card } from 'react-bootstrap';
 import Plot from './Plot';
+import './index.css';
 // import BootstrapTable from 'react-bootstrap-table-next';
 
 export default class Report extends Component {
@@ -40,12 +41,15 @@ export default class Report extends Component {
       d.adjustedTime.toFixed(1)
     );
 
-  makePanel = (title, value) => (
-    <div class="col-sm">
+  makePanel = (title, value, unit = '') => (
+    <div class="col-sm panel">
       <Card>
         <Card.Body>
-          <h4 class="card-title"> {title} </h4>
-          <p> {value} </p>
+          <h4> {title} </h4>
+          <p>
+            {value.toFixed(1)}
+            {unit}
+          </p>
         </Card.Body>
       </Card>
     </div>
@@ -55,9 +59,9 @@ export default class Report extends Component {
     <>
       <h1>Quiz reportcard</h1>
       <div class="row">
-        {this.makePanel('Time avg', this.avgElapsedTime)}
-        {this.makePanel('Time avg', this.avgError)}
-        {this.makePanel('Time avg', this.avgAdjustedTime)}
+        {this.makePanel('Time avg (s)', this.avgElapsedTime)}
+        {this.makePanel('Error avg', this.avgError, '%')}
+        {this.makePanel('Adjusted Time avg (s)', this.avgAdjustedTime)}
       </div>
       <div id="chart" />
       <Table bordered condensed hover responsive>

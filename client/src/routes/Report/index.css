@@ -1,0 +1,13 @@
+.card-body > h4 {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.card-body > p {
+  font-size: 3rem;
+  text-align: center;
+}
+
+.card-body > p > span {
+  font-size: 0.8em;
+}

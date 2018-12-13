@@ -10,12 +10,10 @@ class App extends Component {
     return (
       <div className="App container">
         <Navbar bg="light" expand="lg">
-          <Navbar.Brand>
-            <Link to="/">num</Link>
-          </Navbar.Brand>
+          <Navbar.Brand href="/">num</Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse>
-            <Nav pullRight>
+            <Nav className="justify-content-end">
               <Nav.Item>Signup</Nav.Item>
               <Nav.Item>Login</Nav.Item>
             </Nav>
