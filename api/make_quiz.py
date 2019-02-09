@@ -1,4 +1,3 @@
-import json
 from importlib import import_module
 # from modules import omnibus as modules # Works w/o "." b/c directory treated as module?
 
@@ -21,7 +20,7 @@ def make_quiz(event, context):
             'Access-Control-Allow-Origin': '*', #TODO Make secure
             # 'Access-Control-Allow-Credentials': True
             },
-        'body': json.dumps(message)
+        'body': message
     }
 
     return response
