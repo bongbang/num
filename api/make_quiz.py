@@ -6,15 +6,15 @@ def make_quiz(event, context):
     n = 5 # TODO parameterize
 
     try:
-        module = import_module('modules.' + event['pathParameters']['id'])
-        # module = getattr(modules, event['pathParameters']['id'])
+        quiz_module = import_module('quiz_modules.' + event['pathParameters']['id'])
         status_code = 200
-        temp_list = list(zip(*[module.main() for i in range(n)]))
-        message = {'questions': temp_list[0], 'answers': temp_list[1]}
+        message = [{'question': item[0], 'answer': item[1]} for item in quiz_module.main(n)]
+
     except KeyError:
         status_code = 404
         message = 'Module doesn''t exist'
 
+        # print(message)
     response = {
         'statusCode': status_code,
         'headers': {
