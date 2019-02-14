@@ -20,10 +20,13 @@ var/
 # Security
 *credential*
 
+
+# Database
+/db/
+
 # AWS
 aws/
 client/src/config.js # keys
-./db/
 
 # Vim
 *.swp
