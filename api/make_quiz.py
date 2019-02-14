@@ -1,5 +1,4 @@
 from importlib import import_module
-# from modules import omnibus as modules # Works w/o "." b/c directory treated as module?
 
 def make_quiz(event, context):
     n = 5 # TODO parameterize
@@ -13,7 +12,6 @@ def make_quiz(event, context):
         status_code = 404
         message = 'Module doesn''t exist'
 
-        # print(message)
     response = {
         'statusCode': status_code,
         'headers': {

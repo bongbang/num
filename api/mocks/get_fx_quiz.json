@@ -1,0 +1,10 @@
+{
+  "pathParameters": {
+    "id": "divide_exchange_rate"
+  },
+  "requestContext": {
+    "identity": {
+      "cognitoIdentityId": "USER-SUB-1234"
+    }
+  }
+}
