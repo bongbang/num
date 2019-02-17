@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
+// import { LinkContainer } from 'react-router-bootstrap';
 import './App.css';
 import Routes from './Routes';
 
@@ -9,17 +9,13 @@ class App extends Component {
   render() {
     return (
       <div className="App container">
-        <Navbar fluid collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <Link to="/">num</Link>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand href="/">num</Navbar.Brand>
+          <Navbar.Toggle />
           <Navbar.Collapse>
-            <Nav pullRight>
-              <NavItem href="/signup">Signup</NavItem>
-              <NavItem href="/login">Login</NavItem>
+            <Nav className="justify-content-end">
+              <Nav.Item>Signup</Nav.Item>
+              <Nav.Item>Login</Nav.Item>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

@@ -1,0 +1,15 @@
+.tick line,
+.axis path {
+  shape-rendering: crispEdges;
+  /* vector-effect: non-scaling-stroke; */
+}
+
+svg .label {
+  fill: #000;
+}
+
+rect {
+  fill: crimson;
+  stroke: none;
+  shape-rendering: crispEdges;
+}

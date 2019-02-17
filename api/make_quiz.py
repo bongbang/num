@@ -1,14 +1,13 @@
-import json
-from modules import omnibus as modules
+from importlib import import_module
 
 def make_quiz(event, context):
     n = 5 # TODO parameterize
 
     try:
-        module = getattr(modules, event['pathParameters']['id'])
+        quiz_module = import_module('quiz_modules.' + event['pathParameters']['id'])
         status_code = 200
-        temp_list = list(zip(*[module() for i in range(n)]))
-        message = {'questions': temp_list[0], 'answers': temp_list[1]}
+        message = [{'question': item[0], 'answer': item[1]} for item in quiz_module.main(n)]
+
     except KeyError:
         status_code = 404
         message = 'Module doesn''t exist'
@@ -16,10 +15,10 @@ def make_quiz(event, context):
     response = {
         'statusCode': status_code,
         'headers': {
-            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Origin': '*', #TODO Make secure
             # 'Access-Control-Allow-Credentials': True
             },
-        'body': json.dumps(message)
+        'body': message
     }
 
     return response

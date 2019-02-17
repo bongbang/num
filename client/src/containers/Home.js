@@ -11,11 +11,16 @@ export default class Home extends Component {
           <p>App for mental calculation</p>
 
           {/* TODO: when quiz page is ready, link to that instead of /report. */}
-          <Link to='/report'>Report Mock</Link>
+          <Link to="/report">Report Mock</Link>
 
-          <p>
-            <a href="/quiz/multiply_double_digits">Multiply questions</a>
-          </p>
+          <ul>
+            <li>
+              <a href="/quiz/multiply_double_digits">Multiply questions</a>
+            </li>
+            <li>
+              <Link to="report2">Tom's report mock</Link>
+            </li>
+          </ul>
         </div>
       </div>
     );
