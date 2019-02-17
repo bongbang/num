@@ -21,8 +21,9 @@ var/
 *credential*
 
 
-# Database
+# Specific folders
 /db/
+/api/layers/
 
 # AWS
 aws/
