@@ -4,9 +4,17 @@ service: num-api # NOTE: update this with your service name
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
 
+package:
+  exclude:
+    - aws/**
+    - mocks/**
+    - credentials/**
+    - layers/**
+    - node_modules/**
+
 provider:
   name: aws
-  runtime: python3.6
+  runtime: python3.7
   stage: dev
   region: us-east-1
 
@@ -19,3 +27,6 @@ functions:
           method: get
           cors: true
           # authorizer: aws_iam
+    layers:
+      - arn:aws:lambda:us-east-1:347179582831:layer:psycopg2:1
+      # - {cf:psycopg2-lambda-layer-dev.Psycopg2Layer}
