@@ -6,11 +6,15 @@ def make_quiz(event, context):
     try:
         quiz_module = import_module('quiz_modules.' + event['pathParameters']['id'])
         status_code = 200
-        message = [{'question': item[0], 'answer': item[1]} for item in quiz_module.main(n)]
-
+        try:
+            message = [{'question': item[0], 'answer': item[1]} for item in quiz_module.main(n)]
+        except KeyError:
+            status_code = 404 # or something
+            message = quiz_module
     except KeyError:
         status_code = 404
         message = 'Module doesn''t exist'
+
 
     response = {
         'statusCode': status_code,
