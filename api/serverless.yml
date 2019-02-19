@@ -6,11 +6,11 @@ service: num-api # NOTE: update this with your service name
 
 package:
   exclude:
-    - aws/**
     - mocks/**
     - credentials/**
     - layers/**
     - node_modules/**
+    - requirements.txt
 
 provider:
   name: aws
