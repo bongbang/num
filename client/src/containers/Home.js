@@ -18,6 +18,9 @@ export default class Home extends Component {
               <a href="/quiz/multiply_double_digits">Multiply questions</a>
             </li>
             <li>
+              <a href="/quiz/divide_exchange_rate">Divide exchange rates</a>
+            </li>
+            <li>
               <Link to="report2">Tom's report mock</Link>
             </li>
           </ul>
