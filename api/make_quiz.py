@@ -3,18 +3,23 @@ import json
 
 def make_quiz(event, context):
     n = 5 # TODO parameterize
+    requested_module = event['pathParameters']['id'] #TODO clean up names
 
     try:
-        quiz_module = import_module('quiz_modules.' + event['pathParameters']['id'])
+        quiz_module = import_module('quiz_modules.' + requested_module)
         status_code = 200
+        quiz_set = quiz_module.main(n)
         try:
-            message = [{'question': item[0], 'answer': item[1]} for item in quiz_module.main(n)]
+            message = [{'question': item[0], 'answer': item[1]} for item in quiz_set]
         except KeyError:
             status_code = 404 # or something
-            message = quiz_module
-    except KeyError:
+            message = quiz_set
+    except ModuleNotFoundError:
         status_code = 404
-        message = 'Module doesn''t exist'
+        message = 'Module "{}" doesn''t exist'.format(requested_module)
+    except Exception as e:
+        status_code = 404
+        message = getattr(e, 'message', repr(e))
 
 
     response = {
