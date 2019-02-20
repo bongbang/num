@@ -10,9 +10,10 @@ def make_quiz(event, context):
         quiz_module = import_module('quiz_modules.' + requested_module)
         quiz_set = quiz_module.main(n)
         message = [{'question': item[0], 'answer': item[1]} for item in quiz_set]
-        status_code = 200
-    except ModuleNotFoundError:
-        message = 'Module "{}" doesn''t exist'.format(requested_module)
+    except ModuleNotFoundError as e:
+        message = 'Problem loading "{}" or its dependencies.\n'.format(requested_module) \
+                + getattr(e, 'message', repr(e))
+                #TODO separate handling for non-existing quiz module vs dependency
     except KeyError:
         message = quiz_set
     except Exception as e:
