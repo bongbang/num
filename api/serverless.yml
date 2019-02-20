@@ -28,7 +28,7 @@ functions:
           cors: true
           # authorizer: aws_iam
     layers:
-      - arn:aws:lambda:us-east-1:347179582831:layer:psycopg2:1
+      - arn:aws:lambda:us-east-1:347179582831:layer:psycopg2:2
       # - {cf:psycopg2-lambda-layer-dev.Psycopg2Layer}
 
 # Create our resources with separate CloudFormation templates
