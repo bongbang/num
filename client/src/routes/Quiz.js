@@ -25,12 +25,13 @@ export default class Quiz extends Component {
     // console.log('id: ' + this.props.match.params.id);
     try {
       this.quiz = await API.get('num', `/module/${this.props.match.params.id}`);
-      this.resultSet = new Array(this.quiz.questions.length); //TODO remove if defined above
+      this.resultSet = new Array(this.quiz.length); //TODO remove if defined above
       this.startTime = new Date().getTime();
     } catch (e) {
       alert(e);
     }
 
+    console.log(this.quiz);
     this.setState({ isLoading: false });
   }
 
@@ -41,8 +42,8 @@ export default class Quiz extends Component {
   handleSubmit = event => {
     event.preventDefault();
     this.resultSet[this.state.i] = {
-      question: this.quiz.questions[this.state.i],
-      correctAnswer: this.quiz.answers[this.state.i],
+      question: this.quiz[this.state.i].question,
+      correctAnswer: this.quiz[this.state.i].answer,
       userAnswer: this.state.answer,
       elapsedTime: (new Date().getTime() - this.startTime) / 1000
     };
@@ -61,7 +62,7 @@ export default class Quiz extends Component {
     <>
       <h1>Quiz</h1>
       <p>{this.state.i + 1}.</p>
-      <Card>{!this.state.isLoading && this.quiz.questions[this.state.i]}</Card>
+      <Card>{!this.state.isLoading && this.quiz[this.state.i].question}</Card>
       <form onSubmit={this.handleSubmit}>
         <FormGroup controlId="answer">
           <FormControl
