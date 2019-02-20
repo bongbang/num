@@ -1,4 +1,5 @@
 from importlib import import_module
+import json
 
 def make_quiz(event, context):
     n = 5 # TODO parameterize
@@ -22,7 +23,7 @@ def make_quiz(event, context):
             'Access-Control-Allow-Origin': '*', #TODO Make secure
             # 'Access-Control-Allow-Credentials': True
             },
-        'body': message
+        'body': json.dumps(message) #Needs JSON, otherwise http request fails
     }
 
     return response
