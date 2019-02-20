@@ -1,11 +1,15 @@
 import psycopg2
 import random
-import module_db_credentials as mdc #TODO move to credentials folder
+import module_db_credentials as mdc #TODO move to credentials folder ?
+    # But then credential folder can't be ignored by sls
 from ._currency_codes import codes
+import copy
 
 def main(n):
     base = 'USD' #TODO parameterize
-    codes.remove(base)
+    sample_set = copy.copy(codes) # REQUIRED b/c Lambda doesn't reload module
+                                  # When function is "warm".
+    sample_set.remove(base) # W/o above line, KeyError when warm
 
     try:
         connection = psycopg2.connect(user=mdc.user,
@@ -18,14 +22,13 @@ def main(n):
                 (base,))
         base_plural = cursor.fetchone()[0]
 
-        sample_set = random.sample(codes, n+10) # Extra 10 in case of rejections
+        sample_set = random.sample(sample_set, n+10) # Extra 10 in case of rejections
         cursor.execute("""
             SELECT id, rate/(SELECT rate FROM currency WHERE id=%s), concat(modifier,' ',plural)
             FROM currency
             WHERE id = ANY(%s);
         """, (base, sample_set))
         records = cursor.fetchall()
-        random.shuffle(records) # Otherwise ordered by code
     except psycopg2.Error as error:
         return error.pgcode + ':' + error.diag.message_primary
     finally:
@@ -35,6 +38,7 @@ def main(n):
         except NameError:
             pass
 
+    random.shuffle(records) # Otherwise ordered by code
     question_set = [None] * n
     for i in range(n):
         code, rate, plural = records[i]
