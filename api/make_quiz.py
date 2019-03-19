@@ -1,5 +1,12 @@
 from importlib import import_module
 import json
+import datetime
+import boto3
+
+
+cloud_watch = boto3.client('cloudwatch')
+
+QUIZ_NOT_FOUND_METRIC_VALUE = 'INVALID_QUIZ_NAME'
 
 def make_quiz(event, context):
     n = 5 # TODO parameterize
@@ -10,13 +17,16 @@ def make_quiz(event, context):
         quiz_module = import_module('quiz_modules.' + requested_module)
         quiz_set = quiz_module.main(n)
         message = [{'question': item[0], 'answer': item[1]} for item in quiz_set]
+        record_quiz_requested(event['pathParameters']['id'])
         status_code = 200
     except ModuleNotFoundError as e:
         message = 'Problem loading "{}" or its dependencies.\n'.format(requested_module) \
                 + getattr(e, 'message', repr(e))
                 #TODO separate handling for non-existing quiz module vs dependency
+        record_quiz_requested(QUIZ_NOT_FOUND_METRIC_VALUE)
     except KeyError:
         message = quiz_set
+        record_quiz_requested(QUIZ_NOT_FOUND_METRIC_VALUE)
     except Exception as e:
         message = getattr(e, 'message', repr(e))
 
@@ -31,3 +41,22 @@ def make_quiz(event, context):
     }
 
     return response
+
+
+def record_quiz_requested(quiz_name):
+    cloud_watch.put_metric_data(
+        Namespace='AWS/Lambda',
+        MetricData=[
+            {
+                'MetricName': 'QuizzesRequested',
+                'Dimensions': [
+                    {
+                        'Name': 'QuizName',
+                        'Value': quiz_name
+                    }
+                ],
+                'Timestamp': datetime.datetime.now(),
+                'Value': 1
+            }
+        ]
+    )
