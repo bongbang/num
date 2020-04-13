@@ -1,0 +1,46 @@
+
+<html>
+	<head>
+<script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.3/dt-1.10.12/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-2.2.3/dt-1.10.12/datatables.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<style>
+// #main-content {background: #EEE}
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis path {display:none}
+
+.axis line {
+	fill: none;
+	stroke: #DDD;
+}
+
+svg {
+//	border: 1px solid #CCC;
+}
+
+.line {
+	fill: none;
+	stroke: steelblue;
+}
+</style>
+	</head>
+
+<body>
+<h1>Result</h1>
+<div class='row'>
+<div id='chart-1' class='col-xs-12 col-sm-6 col-md-4 no-padding'></div>
+<div id='chart-2' class='col-xs-12 col-sm-6 col-md-4 no-padding'></div>
+</div>
+<div class="clearfix visible-xs-block"></div>
+<script>
+var dataSet = [[1,"What’s 58°F in °C?","19",14.444444444444445,4.555555555555555,31.538461538461537,9.163],[2,"What’s 48°F in °C?","10",8.88888888888889,1.1111111111111107,12.5,13.184],[3,"What’s 24°F in °C?","-5",-4.444444444444445,0.5555555555555554,12.5,13.006],[4,"What’s 84°F in °C?","28",28.88888888888889,0.8888888888888893,3.076923076923077,11.411],[5,"What’s 37°F in °C?","3",2.7777777777777777,0.22222222222222232,8.000000000000007,8.906]];
+</script>
+<script src="mock.js"></script>
+</body>
+</html>
+

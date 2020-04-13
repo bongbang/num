@@ -4,12 +4,14 @@
   "private": true,
   "dependencies": {
     "aws-amplify": "^1.1.6",
-    "react": "^16.8.3",
+    "grommet": "^2.6.6",
+    "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.3",
     "react-dom": "^16.8.3",
     "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.5"
+    "react-scripts": "^2.1.8",
+    "styled-components": "^4.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -28,7 +30,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "eslint": "^5.14.1",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-import": "^2.16.0",

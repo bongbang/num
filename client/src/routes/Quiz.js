@@ -18,14 +18,14 @@ export default class Quiz extends Component {
     };
 
     this.quiz = [];
-    this.resultSet = []; //TODO define length here if URL contains count and remove below
+    this.resultSet = []; // TODO define length here if URL contains count and remove below
   }
 
   async componentDidMount() {
     // console.log('id: ' + this.props.match.params.id);
     try {
       this.quiz = await API.get('num', `/module/${this.props.match.params.id}`);
-      this.resultSet = new Array(this.quiz.length); //TODO remove if defined above
+      this.resultSet = new Array(this.quiz.length); // TODO remove if defined above
       this.startTime = new Date().getTime();
     } catch (e) {
       alert(e);
@@ -35,7 +35,7 @@ export default class Quiz extends Component {
     this.setState({ isLoading: false });
   }
 
-  handleChange = event => {
+  const handleChange = event => {
     this.setState({ answer: event.target.value });
   };
 
